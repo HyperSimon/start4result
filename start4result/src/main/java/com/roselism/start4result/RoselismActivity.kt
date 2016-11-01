@@ -6,9 +6,9 @@ import java.util.*
 
 open class RoselismActivity : AppCompatActivity() {
 
-    private val requestMap: ArrayList<Pair<Int, (data: Intent) -> Unit>> = ArrayList()
+    private val requestMap: ArrayList<Pair<Int, (data: Intent, resultCode: Int) -> Unit>> = ArrayList()
 
-    fun startActivityForResult(intent: Intent, requestCode: Int, backData: (data: Intent) -> Unit) {
+    fun startActivityForResult(intent: Intent, requestCode: Int, backData: (data: Intent, resultCode: Int) -> Unit) {
         this.startActivityForResult(intent, requestCode)
         requestMap.add(Pair(requestCode, backData))
     }
@@ -16,7 +16,7 @@ open class RoselismActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         requestMap.forEach { pair ->
             if (pair.first == requestCode) {
-                data?.let { pair.second.invoke(it) }
+                data?.let { pair.second.invoke(it, resultCode) }
             }
         }
     }

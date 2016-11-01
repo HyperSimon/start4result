@@ -25,8 +25,8 @@ class KotlinActivity : RoselismActivity() {
 
         button.setOnClickListener {
             val intent = Intent(this, TargetActivity::class.java)
-            startActivityForResult(intent, Constants.Main.REQUEST_CODE_4_DEMO) {
-                Toast.makeText(this, it.getStringExtra(Constants.Target.ARG_DEMO), Toast.LENGTH_SHORT).show()
+            startActivityForResult(intent, Constants.Main.REQUEST_CODE_4_DEMO) { intent, resultCode ->
+                Toast.makeText(this, intent.getStringExtra(Constants.Target.ARG_DEMO), Toast.LENGTH_SHORT).show()
             }
         }
 
